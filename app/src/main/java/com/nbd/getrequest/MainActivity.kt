@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         val jsonRequest= JsonObjectRequest(url , Response.Listener<JSONObject> {
             response ->
             Log.i("JSONRESPONSE", response.getJSONArray("results").toString())
+
+
         },
         Response.ErrorListener { error ->
          Log.w("JSONRESPONSE", error.message as String)
