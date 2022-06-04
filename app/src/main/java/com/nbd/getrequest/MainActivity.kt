@@ -3,15 +3,11 @@ package com.nbd.getrequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.nbd.getrequest.databinding.ActivityMainBinding
-import com.nbd.getrequest.databinding.ActivityMainBinding.inflate
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
@@ -33,14 +29,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
     }
     fun getPokemonList(listAmount: Int) {
         val url="https://pokeapi.co/api/v2/pokemon/?limit=${listAmount}"
 
-        val jsonRequest= JsonObjectRequest(url , Response.Listener<JSONObject> {
-            response ->
-            Log.i("JSONRESPONSE", response.getJSONArray("results").toString())
-
+        val jsonRequest= JsonObjectRequest(url , Response.Listener<JSONObject> {response ->
+            Log.i("JSONRESPONSE", response.getJSONObject("results").toString())
+            binding.rvPoke.adapter=MainAdapter(response.getJSONArray("results"))
 
         },
         Response.ErrorListener { error ->
